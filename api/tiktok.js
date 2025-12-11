@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   const { url } = req.body || {};
 
-  if (!url || typeof url !== "string") {
+  if (!url) {
     return res.status(400).json({ success: false, message: "URL TikTok tidak valid." });
   }
 
@@ -15,33 +15,24 @@ export default async function handler(req, res) {
     const response = await fetch(apiUrl, {
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-          "(KHTML, like Gecko) Chrome/119.0 Safari/537.36",
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0 Safari/537.36",
       },
     });
 
-    if (!response.ok) {
-      throw new Error("Gagal ambil data dari API pihak ketiga.");
-    }
-
     const json = await response.json();
 
-    if (json.code !== 0 || !json.data || !json.data.play) {
-      throw new Error("API tidak mengembalikan link video yang valid.");
+    if (json.code !== 0 || !json.data.play) {
+      throw new Error("Tidak bisa mengambil video.");
     }
-
-    const downloadUrl = json.data.play;
-    const title = json.data.title || "Video TikTok";
-    const author = json.data.author || "Unknown";
 
     return res.status(200).json({
       success: true,
-      downloadUrl,
-      title,
-      author,
+      downloadUrl: json.data.play,
+      title: json.data.title || "Video TikTok",
+      author: json.data.author || "Unknown",
     });
+
   } catch (err) {
-    console.error(err);
     return res.status(500).json({
       success: false,
       message: "Server error, coba lagi nanti.",
