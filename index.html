@@ -134,13 +134,16 @@
   - Jika terkena CORS, gunakan proxy server (contoh Node proxy disertakan di komentar)
 */
 
+const WORKER = "https://late-bush-e576.tesnaranja.workers.dev";
+
 const endpoints = [
-  // utama: tikwm
-  (url) => `https://api.tikwm.com/?url=${encodeURIComponent(url)}`,
-  // fallback: example (may require proxy)
+  // pakai Worker (utama & stabil)
+  (url) => `${WORKER}/?url=${encodeURIComponent(url)}`,
+
+  // fallback cadangan (opsional)
   (url) => `https://ttsave.app/api/fetch?url=${encodeURIComponent(url)}`
 ];
-
+  
 const goBtn = document.getElementById('goBtn');
 const clearBtn = document.getElementById('clearBtn');
 const urlInput = document.getElementById('urlInput');
