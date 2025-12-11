@@ -35,7 +35,16 @@ form.addEventListener("submit", async (e) => {
     const finalURL = data.downloadUrl;
     // Preview
     videoEl.src = finalURL;
-    document.getElementById("tiktok-author").textContent = data.author?.nickname || "Unknown";
+    const authorEl = document.getElementById("tiktok-author");
+    const nickname = data.author?.nickname;
+    
+    if (nickname) {
+      authorEl.textContent = `TikTok : ${nickname}`;
+      authorEl.style.display = "block"; // pastikan terlihat
+    } else {
+      authorEl.style.display = "none"; // sembunyikan kalau tidak ada
+    }
+
 
     // Tombol download → pakai proxy
     downloadLink.href = "/api/download?url=" + encodeURIComponent(finalURL);
