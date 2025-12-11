@@ -1,12 +1,18 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
+    return res.status(405).json({
+      success: false,
+      message: "Method not allowed"
+    });
   }
 
   const { url } = req.body || {};
 
   if (!url) {
-    return res.status(400).json({ success: false, message: "URL TikTok tidak valid." });
+    return res.status(400).json({
+      success: false,
+      message: "URL TikTok tidak valid."
+    });
   }
 
   try {
@@ -21,21 +27,9 @@ export default async function handler(req, res) {
 
     const json = await response.json();
 
-    if (json.code !== 0 || !json.data.play) {
+    if (json.code !== 0 || !json.data) {
       throw new Error("Tidak bisa mengambil video.");
     }
 
-    return res.status(200).json({
-      success: true,
-      downloadUrl: json.data.play,
-      title: json.data.title || "Video TikTok",
-      author: json.data.author || "Unknown",
-    });
-
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: "Server error, coba lagi nanti.",
-    });
-  }
-}
+    // 🔥 Ambil link auto-download
+    const downloa
