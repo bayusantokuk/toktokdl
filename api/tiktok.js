@@ -1,32 +1,32 @@
-// api/tiktok.js
-import fetch from "node-fetch";
+// /api/tiktok.js
+import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  const { url } = req.query;
-
-  if (!url) return res.status(400).json({ error: "Missing TikTok URL" });
+  const url = req.query.url;
+  if (!url) {
+    res.status(400).json({ error: 'Missing TikTok URL' });
+    return;
+  }
 
   try {
-    // TikWM API endpoint
+    // Ganti endpoint ini sesuai API TikTok publik yang bisa diakses
     const apiUrl = `https://api.tikwm.com/?url=${encodeURIComponent(url)}`;
-
     const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
     const data = await response.json();
 
-    // ambil direct video URL (no watermark)
-    let videoUrl = data.nowm || data.video?.play_addr?.url;
-
-    if (!videoUrl) {
-      return res.status(404).json({ error: "Gagal menemukan video" });
+    if (!data || !data.nowm) {
+      res.status(400).json({ error: 'Video tidak ditemukan / API gagal' });
+      return;
     }
 
-    // CORS header supaya frontend bisa fetch
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    return res.json({ videoUrl });
+    res.status(200).json({
+      videoUrl: data.nowm,
+      title: data.title || 'Video TikTok',
+      author: data.author || 'Unknown',
+      thumb: data.cover || ''
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: 'Server error' });
   }
 }
