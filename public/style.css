@@ -38,4 +38,90 @@ body {
 }
 
 /* Input */
-.
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 14px;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  border-color: #4c59ff;
+  box-shadow: 0 0 10px rgba(76,89,255,0.2);
+  outline: none;
+}
+
+/* Button */
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #4c59ff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: #3b49e6;
+  transform: translateY(-2px);
+}
+
+/* Status & Error */
+.status {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.error {
+  color: #d43f3f;
+  margin-top: 12px;
+}
+
+/* Result */
+.result {
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+}
+
+/* Video Preview */
+#tiktok-preview {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Download Button */
+.download-btn {
+  display: inline-block;
+  padding: 14px;
+  background: #4c59ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #3b49e6;
+  transform: translateY(-2px);
+}
