@@ -1,33 +1,58 @@
-<script>
-const goBtn = document.getElementById('goBtn');
-const urlInput = document.getElementById('urlInput');
-const resultEl = document.getElementById('result');
-const dlBtn = document.getElementById('dlBtn');
-const thumbEl = document.getElementById('thumb');
-const titleEl = document.getElementById('title');
-const authorEl = document.getElementById('author');
-const statusEl = document.getElementById('status');
-const errorEl = document.getElementById('error');
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>TokTokDL</title>
+</head>
+<body>
+  <h1>TokTokDL — TikTok Downloader</h1>
+  <input id="urlInput" placeholder="Tempel link TikTok">
+  <button id="goBtn">Download</button>
+  <div id="status"></div>
+  <div id="error" style="color:red; display:none;"></div>
 
-goBtn.addEventListener('click', async () => {
-  const url = urlInput.value.trim();
-  errorEl.style.display = 'none';
-  statusEl.textContent = 'Mencari video...';
+  <div id="result" style="display:none;">
+    <div id="thumb" style="width:200px;height:120px;background:#ccc;"></div>
+    <h3 id="title"></h3>
+    <p id="author"></p>
+    <a id="dlBtn" href="#" download>Download</a>
+  </div>
 
-  try {
-    const res = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
-    const data = await res.json();
+  <script>
+  const goBtn = document.getElementById('goBtn');
+  const urlInput = document.getElementById('urlInput');
+  const resultEl = document.getElementById('result');
+  const dlBtn = document.getElementById('dlBtn');
+  const thumbEl = document.getElementById('thumb');
+  const titleEl = document.getElementById('title');
+  const authorEl = document.getElementById('author');
+  const statusEl = document.getElementById('status');
+  const errorEl = document.getElementById('error');
 
-    if (!res.ok) throw new Error(data.error || 'Gagal fetch');
+  goBtn.addEventListener('click', async () => {
+    const url = urlInput.value.trim();
+    errorEl.style.display = 'none';
+    statusEl.textContent = 'Mencari video...';
 
-    dlBtn.href = data.videoUrl;
-    dlBtn.setAttribute('download', 'tiktok.mp4');
-    resultEl.style.display = 'flex';
-    statusEl.textContent = 'Selesai! Klik Download.';
-  } catch (e) {
-    errorEl.style.display = 'block';
-    errorEl.textContent = e.message;
-    statusEl.textContent = '';
-  }
-});
-</script>
+    try {
+      const res = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Gagal fetch');
+
+      dlBtn.href = data.videoUrl;
+      dlBtn.setAttribute('download', 'tiktok.mp4');
+      resultEl.style.display = 'block';
+      thumbEl.style.backgroundImage = `url('${data.thumb || ''}')`;
+      titleEl.textContent = data.title || 'Video TikTok';
+      authorEl.textContent = data.author || '';
+      statusEl.textContent = 'Selesai! Klik Download.';
+    } catch (e) {
+      errorEl.style.display = 'block';
+      errorEl.textContent = e.message;
+      statusEl.textContent = '';
+    }
+  });
+  </script>
+</body>
+</html>
