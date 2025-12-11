@@ -52,6 +52,8 @@ goBtn.addEventListener('click', async () => {
 
     if (!res.ok) throw new Error(data.error || 'Gagal fetch');
 
+    if (!data.videoUrl) throw new Error("Video tidak tersedia");
+
     dlBtn.href = data.videoUrl;
     dlBtn.setAttribute('download', 'tiktok.mp4');
     thumbEl.src = data.thumb;
@@ -61,10 +63,4 @@ goBtn.addEventListener('click', async () => {
     statusEl.textContent = 'Selesai! Klik Download.';
   } catch (e) {
     errorEl.textContent = e.message;
-    statusEl.textContent = '';
-    resultEl.style.display = 'none';
-  }
-});
-</script>
-</body>
-</html>
+    statusEl.tex
