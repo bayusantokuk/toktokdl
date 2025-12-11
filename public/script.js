@@ -35,7 +35,6 @@ form.addEventListener("submit", async (e) => {
     const finalURL = data.downloadUrl;
     // Preview
     videoEl.src = finalURL;
-    document.getElementById("tiktok-title").textContent = data.title || "Video TikTok";
     document.getElementById("tiktok-author").textContent = data.author?.nickname || "Unknown";
 
     // Tombol download → pakai proxy
