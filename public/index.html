@@ -5,60 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TokTokDL — TikTok Downloader</title>
 
-  <!-- Font -->
+  <!-- Retro fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Style -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="container">
 
-    <!-- Top navbar / frame -->
-    <header class="navbar">
-      <div class="logo">TK</div>
-      <nav class="navlinks">
-        <a href="#">Projects</a>
-        <a href="#">Blog</a>
-        <a href="#">Learn</a>
-        <a href="#">Clone me</a>
-        <a href="#">Find me</a>
-      </nav>
-    </header>
-
-    <!-- Hero -->
+    <!-- Hero Title -->
     <section class="hero">
-      <div class="hero-left">
-        <h1 class="title">Hello.<br>I'm TokTokDL.</h1>
-        <p class="lead">Sebuah alat sederhana untuk mendownload video TikTok — paste link, mulai, dan download.</p>
-
-        <!-- Quick clone button style -->
-        <div class="quick-links">
-          <a class="btn-retro" href="#">Clone me on Webflow</a>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <!-- Retro mascot / art placeholder -->
-        <div class="mascot-window window-card">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            mascot.png
-          </div>
-          <div class="card-body" style="padding:28px; text-align:center;">
-            <svg width="160" height="120" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <rect x="0" y="0" width="160" height="120" fill="#fff" stroke="#111" stroke-width="6" rx="6"/>
-              <circle cx="80" cy="55" r="26" fill="#111" />
-            </svg>
-          </div>
-        </div>
-      </div>
+      <h1 class="title">Hello.<br>I'm TokTokDL.</h1>
+      <p class="lead">
+        Sebuah alat sederhana untuk mendownload video TikTok — paste link, mulai, dan download.
+      </p>
     </section>
 
-    <!-- TikTok form card (kept for script.js) -->
-    <div class="card window-card tiktok-card" style="margin-top:22px;">
+    <!-- Window Card Downloader -->
+    <div class="window-card tiktok-card">
       <div class="topbar">
-        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
         tiktok-downloader
       </div>
 
@@ -73,90 +44,23 @@
       </div>
     </div>
 
-    <!-- Result panel (hidden by default, script.js will show) -->
-    <div id="tiktok-result" class="result hidden window-card" style="margin-top:22px;">
+    <!-- Result Panel -->
+    <div id="tiktok-result" class="window-card hidden result">
       <div class="topbar">
-        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
         result
       </div>
-
       <div class="card-body">
         <video id="tiktok-preview" controls></video>
-
         <h3 id="tiktok-title" class="video-title"></h3>
         <p id="tiktok-author" class="video-author"></p>
-
-        <a id="tiktok-download" class="download-btn btn-retro" href="#" download>
-          Download Video
-        </a>
+        <a id="tiktok-download" class="btn-retro" href="#" download>Download Video</a>
       </div>
     </div>
-
-    <!-- Projects section (sample) -->
-    <section style="margin-top:36px;">
-      <h2 class="section-title">Projects</h2>
-
-      <div class="projects-grid">
-        <article class="window-card">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            2020-04-08-project.html
-          </div>
-
-          <img src="https://picsum.photos/800/300?random=1" alt="project image">
-          <div class="card-body">
-            <h3>Possimus</h3>
-            <p>Officia sit numquam fugiat sint molestiae id. Est modi est at debitis dolorem. Ut voluptate quod rem dolores sint molestiae maiores.</p>
-            <a class="btn-retro" href="#">View project</a>
-          </div>
-        </article>
-
-        <article class="window-card">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            2020-04-08-project.html
-          </div>
-
-          <img src="https://picsum.photos/800/300?random=2" alt="project image">
-          <div class="card-body">
-            <h3>Dolorum Ullam Totam</h3>
-            <p>Consequatur consequatur et quisquam sit velit. Distinctio sint omnis. Vitae et sint repellendus consequatur cumque.</p>
-            <a class="btn-retro" href="#">View project</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Blog stack sample -->
-    <section style="margin-top:40px; margin-bottom:60px;">
-      <h2 class="section-title">From the blog</h2>
-
-      <div class="blog-stack">
-        <div class="stack-item window-card" style="top:6px;">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            2020-04-07-blog.pdf
-          </div>
-          <img src="https://picsum.photos/900/300?random=3" alt="blog" />
-        </div>
-
-        <div class="stack-item window-card" style="top:48px;">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            2020-04-06-blog.pdf
-          </div>
-          <img src="https://picsum.photos/900/300?random=4" alt="blog" />
-        </div>
-
-        <div class="stack-item window-card" style="top:96px;">
-          <div class="topbar">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            2020-04-06-blog.pdf
-          </div>
-          <img src="https://picsum.photos/900/300?random=5" alt="blog" />
-        </div>
-      </div>
-    </section>
 
   </div>
 
