@@ -1,33 +1,84 @@
-/* Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
-
 body {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  transition: background 0.5s ease;
+  margin: 0;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+  color: #222;
 }
 
-/* Container */
 .container {
-  max-width: 500px;
-  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
   text-align: center;
 }
 
-/* Title */
 .title {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4c59ff;
   color: #fff;
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 8px rgba(0,0,
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.error {
+  color: #d43f3f;
+  margin-top: 10px;
+}
+
+.result {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.hidden {
+  display: none;
+}
+
+#tiktok-preview {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.download-btn {
+  display: block;
+  padding: 14px;
+  background: #4c59ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+}
