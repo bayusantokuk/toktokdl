@@ -1,17 +1,17 @@
 export default async function handler(req, res) {
-  const { url } = req.query;
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
+  const { url } = req.body;
   if (!url) return res.status(400).json({ error: "Missing TikTok URL" });
 
   try {
-    const apiUrl = `https://api.tikwm.com/?url=${encodeURIComponent(url)}`;
-    const response = await fetch(apiUrl); // fetch global Node 18+
-    const data = await response.json();
+    const apiRes = await fetch(`https://api.tikwm.com/?url=${encodeURIComponent(url)}`);
+    const data = await apiRes.json();
 
     const videoUrl = data.nowm || data.video?.play_addr?.urlList?.[0];
-    const thumb = data.thumb || data.cover || '';
-    const title = data.title || 'Video TikTok';
-    const author = data.author || 'Unknown';
+    const thumb = data.thumb || data.cover || "";
+    const title = data.title || "Video TikTok";
+    const author = data.author || "Unknown";
 
     if (!videoUrl) return res.status(500).json({ error: "Gagal mendapatkan video" });
 
