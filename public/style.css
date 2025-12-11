@@ -1,84 +1,41 @@
+/* Body & Global */
 body {
   margin: 0;
-  background: #ffffff;
+  background: #f0f2f8; /* lebih lembut daripada putih polos */
   font-family: "Inter", sans-serif;
   color: #222;
 }
 
+/* Container */
 .container {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 60px auto;
   text-align: center;
+  padding: 0 15px;
 }
 
+/* Title */
 .title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  color: #4c59ff; /* lebih hidup */
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
 }
 
+/* Card */
 .card {
   background: #fff;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-  font-size: 16px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
 }
 
-.btn {
-  width: 100%;
-  padding: 12px;
-  background: #4c59ff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.status {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #333;
-}
-
-.error {
-  color: #d43f3f;
-  margin-top: 10px;
-}
-
-.result {
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.hidden {
-  display: none;
-}
-
-#tiktok-preview {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-
-.download-btn {
-  display: block;
-  padding: 14px;
-  background: #4c59ff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 10px;
-  margin-top: 15px;
-  font-size: 16px;
-}
+/* Input */
+.
