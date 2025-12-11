@@ -19,7 +19,7 @@ form.addEventListener("submit", async (e) => {
   errorEl.textContent = "";
   statusEl.textContent = "Mencari video TikTok...";
   button.disabled = true;
-  resultEl.style.display = "none";
+  resultEl.classList.remove("show");
 
   try {
     const res = await fetch("/api/tiktok", {
@@ -53,8 +53,7 @@ form.addEventListener("submit", async (e) => {
     document.getElementById("tiktok-title").textContent = data.title;
     document.getElementById("tiktok-author").textContent = data.author;
 
-    resultEl.style.display = "block";
-    resultEl.classList.add("show"); // supaya fade-in muncul
+    resultEl.classList.add("show");
     statusEl.textContent = isMobile()
       ? "Tap tombol Download Video di bawah untuk menyimpan."
       : "Selesai!";
