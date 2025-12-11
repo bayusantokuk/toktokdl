@@ -1,25 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
 <title>TokTokDL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:sans-serif;background:#f7f8fb;color:#333;padding:20px;}
+input,button{padding:10px;margin:5px;}
+#result{margin-top:20px;display:none;}
+#thumb{width:200px;height:150px;background:#eee;margin-bottom:10px;}
+</style>
 </head>
 <body>
 <h1>TokTokDL — TikTok Downloader</h1>
-
 <input id="urlInput" placeholder="Tempel link TikTok">
 <button id="goBtn">Download</button>
-
 <div id="status"></div>
-<div id="error" style="color:red; display:none;"></div>
+<div id="error" style="color:red;display:none;"></div>
 
-<div id="result" style="display:none;">
+<div id="result">
+  <div id="thumb"></div>
   <h3 id="title"></h3>
   <p id="author"></p>
-  <img id="thumb" style="max-width:300px;">
-  <br>
-  <a id="dlBtn" href="#" download>Download Video</a>
+  <a id="dlBtn" href="#" download="tiktok.mp4">Download Video</a>
 </div>
 
 <script>
@@ -45,11 +48,9 @@ goBtn.addEventListener('click', async () => {
     if (!res.ok) throw new Error(data.error || 'Gagal fetch');
 
     dlBtn.href = data.videoUrl;
-    dlBtn.setAttribute('download', 'tiktok.mp4');
-    thumbEl.src = data.thumb || '';
-    titleEl.textContent = data.title || '';
-    authorEl.textContent = data.author || '';
-
+    titleEl.textContent = data.title;
+    authorEl.textContent = data.author;
+    thumbEl.style.backgroundImage = `url('${data.thumb}')`;
     resultEl.style.display = 'block';
     statusEl.textContent = 'Selesai! Klik Download.';
   } catch (e) {
