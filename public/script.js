@@ -40,10 +40,7 @@ form.addEventListener("submit", async (e) => {
 
     // Tombol download → pakai proxy
     downloadLink.href = "/api/download?url=" + encodeURIComponent(finalURL);
-
-    // Gunakan author string langsung
-    const safeAuthor = (data.author || "Unknown").replace(/[^a-z0-9]/gi, "_");
-    downloadLink.download = `tiktok-${safeAuthor}.mp4`;
+    downloadLink.download = "tiktok-video.mp4";
     
     resultEl.classList.remove("hidden");
     statusEl.textContent = "Selesai!";
