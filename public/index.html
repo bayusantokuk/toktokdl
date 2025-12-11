@@ -1,29 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TokTokDL — TikTok Downloader</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="container">
-  <h1>TokTokDL</h1>
-  <p class="subtitle">Download video TikTok tanpa watermark</p>
+  <h1 class="title">TokTokDL</h1>
 
-  <form id="tiktok-form">
-    <input id="tiktok-url" type="text" placeholder="Tempel link TikTok di sini" required>
-    <button id="tiktok-btn">Start</button>
-  </form>
+  <div class="card">
+    <form id="tiktok-form">
+      <input id="tiktok-url" class="input" placeholder="Tempel link TikTok di sini">
+      <button id="tiktok-btn" class="btn">Start</button>
+    </form>
 
-  <div id="tiktok-status"></div>
-  <div id="tiktok-error" class="error"></div>
+    <p id="tiktok-status" class="status"></p>
+    <p id="tiktok-error" class="error"></p>
+  </div>
 
-  <div id="tiktok-result" class="hidden">
-    <video id="tiktok-preview" controls width="100%"></video>
-    <h3 id="tiktok-title"></h3>
-    <p id="tiktok-author"></p>
-    <a id="tiktok-download" href="#" download class="btn-download">Download Video</a>
+  <div id="tiktok-result" class="result hidden">
+    <video id="tiktok-preview" controls></video>
+
+    <h3 id="tiktok-title" class="video-title"></h3>
+    <p id="tiktok-author" class="video-author"></p>
+
+    <a id="tiktok-download" class="download-btn" href="#" download>
+      Download Video
+    </a>
   </div>
 </div>
 
