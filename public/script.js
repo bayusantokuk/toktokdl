@@ -40,7 +40,8 @@ form.addEventListener("submit", async (e) => {
 
     // Tombol download → pakai proxy
     downloadLink.href = "/api/download?url=" + encodeURIComponent(finalURL);
-    downloadLink.download = "tiktok-video.mp4";
+    const safeAuthor = (data.author?.nickname || "Unknown").replace(/[^a-z0-9]/gi, "_");
+    downloadLink.download = `tiktok-${safeAuthor}.mp4`;
 
 
     resultEl.classList.remove("hidden");
