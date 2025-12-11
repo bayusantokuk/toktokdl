@@ -4,12 +4,10 @@ export default async function handler(req, res) {
   if (!url) return res.status(400).json({ error: "Missing TikTok URL" });
 
   try {
-    // Contoh endpoint publik TikTok downloader
     const apiUrl = `https://api.tikwm.com/?url=${encodeURIComponent(url)}`;
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl); // fetch global Node 18+
     const data = await response.json();
 
-    // Ambil data video
     const videoUrl = data.nowm || data.video?.play_addr?.urlList?.[0];
     const thumb = data.thumb || data.cover || '';
     const title = data.title || 'Video TikTok';
