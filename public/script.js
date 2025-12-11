@@ -10,6 +10,8 @@ const resultEl = document.getElementById("tiktok-result");
 const videoEl = document.getElementById("tiktok-preview");
 const downloadLink = document.getElementById("tiktok-download");
 const button = document.getElementById("tiktok-btn");
+const titleEl = document.getElementById("tiktok-title");
+const authorEl = document.getElementById("tiktok-author");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -19,7 +21,7 @@ form.addEventListener("submit", async (e) => {
   errorEl.textContent = "";
   statusEl.textContent = "Mencari video TikTok...";
   button.disabled = true;
-  resultEl.classList.remove("show");
+  resultEl.classList.add("hidden");
 
   try {
     const res = await fetch("/api/tiktok", {
@@ -36,27 +38,17 @@ form.addEventListener("submit", async (e) => {
       throw new Error(data.message || "Server tidak mengembalikan video.");
     }
 
-    // Auto-download desktop
-    if (!isMobile()) {
-      const a = document.createElement("a");
-      a.href = data.downloadUrl;
-      a.download = "tiktok-video.mp4";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
     // Preview & tombol download
     videoEl.src = data.downloadUrl;
     downloadLink.href = data.downloadUrl;
     downloadLink.download = "tiktok-video.mp4";
-    document.getElementById("tiktok-title").textContent = data.title;
-    document.getElementById("tiktok-author").textContent = data.author;
+    titleEl.textContent = data.title;
+    authorEl.textContent = data.author;
 
-    resultEl.classList.add("show");
+    resultEl.classList.remove("hidden");
     statusEl.textContent = isMobile()
       ? "Tap tombol Download Video di bawah untuk menyimpan."
-      : "Selesai!";
+      : "Selesai! Klik tombol download.";
   } catch (err) {
     console.error(err);
     errorEl.textContent = err.message;
