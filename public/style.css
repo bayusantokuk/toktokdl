@@ -130,3 +130,7 @@ body::before {
   font-style: italic;
   user-select: none;
 }
+
+#tiktok-result .card-body {
+  text-align: center;
+}
