@@ -1,84 +1,134 @@
-body {
+/* Global Reset */
+* {
   margin: 0;
-  background: #ffffff;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  color: #222;
 }
 
+body {
+  background: linear-gradient(135deg, #f3f4fd, #ffffff);
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container */
 .container {
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 500px;
+  width: 100%;
   text-align: center;
 }
 
+/* Title */
 .title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
-  margin-bottom: 20px;
+  color: #4c59ff;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
 }
 
+/* Card */
 .card {
-  background: #fff;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* Input */
 .input {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
   border: 1px solid #ddd;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   font-size: 16px;
+  transition: border 0.3s ease;
 }
 
+.input:focus {
+  border-color: #4c59ff;
+  outline: none;
+  box-shadow: 0 0 10px rgba(76, 89, 255, 0.2);
+}
+
+/* Button */
 .btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background: #4c59ff;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.status {
-  margin-top: 10px;
+.btn:hover {
+  background: #3b49e6;
+  transform: translateY(-2px);
+}
+
+/* Status & Error */
+.status, .error {
+  margin-top: 12px;
   font-size: 14px;
-  color: #333;
 }
 
 .error {
   color: #d43f3f;
-  margin-top: 10px;
 }
 
+/* Result */
 .result {
   margin-top: 30px;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 25px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hidden {
-  display: none;
+.result:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
+/* Video Preview */
 #tiktok-preview {
   width: 100%;
-  border-radius: 12px;
-  margin-bottom: 15px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
+/* Download Button */
 .download-btn {
-  display: block;
-  padding: 14px;
+  display: inline-block;
+  padding: 14px 25px;
   background: #4c59ff;
   color: #fff;
   text-decoration: none;
-  border-radius: 10px;
-  margin-top: 15px;
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #3b49e6;
+  transform: translateY(-2px);
 }
