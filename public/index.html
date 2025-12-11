@@ -1,19 +1,33 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>TokTokDL</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <h1>TokTokDL</h1>
-  <p>Download video TikTok publik tanpa watermark.</p>
+<script>
+const goBtn = document.getElementById('goBtn');
+const urlInput = document.getElementById('urlInput');
+const resultEl = document.getElementById('result');
+const dlBtn = document.getElementById('dlBtn');
+const thumbEl = document.getElementById('thumb');
+const titleEl = document.getElementById('title');
+const authorEl = document.getElementById('author');
+const statusEl = document.getElementById('status');
+const errorEl = document.getElementById('error');
 
-  <input id="urlInput" placeholder="Tempel link TikTok di sini">
-  <button id="goBtn">Download</button>
+goBtn.addEventListener('click', async () => {
+  const url = urlInput.value.trim();
+  errorEl.style.display = 'none';
+  statusEl.textContent = 'Mencari video...';
 
-  <a id="dlBtn" style="display:none;">Download Video</a>
+  try {
+    const res = await fetch(`/api/tiktok?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
 
-  <script src="script.js"></script>
-</body>
-</html>
+    if (!res.ok) throw new Error(data.error || 'Gagal fetch');
+
+    dlBtn.href = data.videoUrl;
+    dlBtn.setAttribute('download', 'tiktok.mp4');
+    resultEl.style.display = 'flex';
+    statusEl.textContent = 'Selesai! Klik Download.';
+  } catch (e) {
+    errorEl.style.display = 'block';
+    errorEl.textContent = e.message;
+    statusEl.textContent = '';
+  }
+});
+</script>
