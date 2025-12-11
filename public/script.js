@@ -39,9 +39,10 @@ form.addEventListener("submit", async (e) => {
     document.getElementById("tiktok-title").textContent = data.title;
     document.getElementById("tiktok-author").textContent = data.author;
 
-    // Tombol download
-    downloadLink.href = finalURL;
+    // Tombol download → pakai proxy
+    downloadLink.href = "/api/download?url=" + encodeURIComponent(finalURL);
     downloadLink.download = "tiktok-video.mp4";
+
 
     resultEl.classList.remove("hidden");
     statusEl.textContent = "Selesai!";
