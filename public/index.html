@@ -4,15 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TokTokDL — TikTok Downloader</title>
-<style>
-body{font-family:sans-serif;padding:40px;background:#f7f8fb;color:#333;}
-.wrap{max-width:600px;margin:0 auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-input{width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
-button{padding:10px 20px;border:none;border-radius:8px;background:#6d28d9;color:#fff;cursor:pointer;}
-#result{margin-top:20px;display:none;}
-#thumb{width:100%;border-radius:8px;}
-.error{color:#ef4444;}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
@@ -32,76 +24,6 @@ button{padding:10px 20px;border:none;border-radius:8px;background:#6d28d9;color:
   </div>
 </div>
 
-<script>
-// Deteksi mobile
-function isMobile() {
-  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
-}
-
-// Setup TikTok downloader
-function setupTikTokDownloader() {
-  const form = document.getElementById("tiktok-form");
-  const input = document.getElementById("tiktok-url");
-  const statusEl = document.getElementById("tiktok-status");
-  const errorEl = document.getElementById("tiktok-error");
-  const resultEl = document.getElementById("tiktok-result");
-  const videoEl = document.getElementById("tiktok-preview");
-  const downloadLink = document.getElementById("tiktok-download");
-  const button = document.getElementById("tiktok-btn");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const url = input.value.trim();
-    if (!url) return;
-
-    errorEl.textContent = "";
-    statusEl.textContent = "Mencari video TikTok...";
-    button.disabled = true;
-    resultEl.style.display = "none";
-
-    try {
-      const res = await fetch("/api/tiktok", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url })
-      });
-
-      if (!res.ok) throw new Error("Gagal menghubungi server.");
-
-      const data = await res.json();
-
-      if (!data.videoUrl) throw new Error(data.error || "Server tidak mengembalikan video.");
-
-      // Auto-download desktop
-      if (!isMobile()) {
-        const a = document.createElement("a");
-        a.href = data.videoUrl;
-        a.download = "tiktok-video.mp4";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      }
-
-      // Preview & tombol download
-      videoEl.src = data.videoUrl;
-      downloadLink.href = data.videoUrl;
-      downloadLink.download = "tiktok-video.mp4";
-      document.getElementById("tiktok-title").textContent = data.title || "";
-      document.getElementById("tiktok-author").textContent = data.author || "";
-
-      resultEl.style.display = "block";
-      statusEl.textContent = isMobile() ? "Tap tombol Download Video di bawah untuk menyimpan." : "Selesai!";
-    } catch (err) {
-      console.error(err);
-      errorEl.textContent = err.message;
-      statusEl.textContent = "";
-    } finally {
-      button.disabled = false;
-    }
-  });
-}
-
-setupTikTokDownloader();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
