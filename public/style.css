@@ -1,80 +1,84 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f9f9f9;
-  color: #333;
   margin: 0;
-  padding: 0;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+  color: #222;
 }
 
 .container {
   max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 40px auto;
   text-align: center;
 }
 
-h1 {
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  color: #666;
+.title {
+  font-size: 32px;
+  font-weight: 700;
   margin-bottom: 20px;
 }
 
-input[type=text] {
+.card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.input {
   width: 100%;
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
   font-size: 16px;
 }
 
-button {
-  padding: 12px 20px;
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4c59ff;
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  background: #6d28d9;
-  color: white;
-  cursor: pointer;
+  border-radius: 10px;
   font-size: 16px;
+  cursor: pointer;
 }
 
-button:disabled {
-  background: #a78bfa;
-  cursor: not-allowed;
+.status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
 }
 
 .error {
-  color: #ef4444;
+  color: #d43f3f;
   margin-top: 10px;
 }
 
-#tiktok-result.hidden {
+.result {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.hidden {
   display: none;
 }
 
-#tiktok-result {
-  margin-top: 20px;
-  text-align: center;
-}
-
 #tiktok-preview {
-  border-radius: 8px;
-  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-.btn-download {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background: #6d28d9;
-  color: white;
-  border-radius: 8px;
+.download-btn {
+  display: block;
+  padding: 14px;
+  background: #4c59ff;
+  color: #fff;
   text-decoration: none;
-  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 16px;
 }
