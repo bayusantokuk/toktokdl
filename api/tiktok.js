@@ -1,23 +1,50 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, message: "Method not allowed" });
+  }
 
-  const { url } = req.body;
-  if (!url) return res.status(400).json({ error: "Missing TikTok URL" });
+  const { url } = req.body || {};
+
+  if (!url || typeof url !== "string") {
+    return res.status(400).json({ success: false, message: "URL TikTok tidak valid." });
+  }
 
   try {
-    const apiRes = await fetch(`https://api.tikwm.com/?url=${encodeURIComponent(url)}`);
-    const data = await apiRes.json();
+    const apiUrl = "https://www.tikwm.com/api/?url=" + encodeURIComponent(url);
 
-    const videoUrl = data.nowm || data.video?.play_addr?.urlList?.[0];
-    const thumb = data.thumb || data.cover || "";
-    const title = data.title || "Video TikTok";
-    const author = data.author || "Unknown";
+    const response = await fetch(apiUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+          "(KHTML, like Gecko) Chrome/119.0 Safari/537.36",
+      },
+    });
 
-    if (!videoUrl) return res.status(500).json({ error: "Gagal mendapatkan video" });
+    if (!response.ok) {
+      throw new Error("Gagal ambil data dari API pihak ketiga.");
+    }
 
-    res.status(200).json({ videoUrl, thumb, title, author });
+    const json = await response.json();
+
+    if (json.code !== 0 || !json.data || !json.data.play) {
+      throw new Error("API tidak mengembalikan link video yang valid.");
+    }
+
+    const downloadUrl = json.data.play;
+    const title = json.data.title || "Video TikTok";
+    const author = json.data.author || "Unknown";
+
+    return res.status(200).json({
+      success: true,
+      downloadUrl,
+      title,
+      author,
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Terjadi kesalahan server" });
+    return res.status(500).json({
+      success: false,
+      message: "Server error, coba lagi nanti.",
+    });
   }
 }
