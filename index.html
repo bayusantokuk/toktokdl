@@ -1,116 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>TokTokDL — TikTok Video Downloader</title>
-  <style>
-    body { font-family:sans-serif; background:#f7f8fb; color:#333; margin:0; padding:0; }
-    .wrap { max-width:600px; margin:50px auto; padding:20px; background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08);}
-    input { width:100%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc; }
-    button { padding:10px 16px; border:none; border-radius:8px; cursor:pointer; margin-right:6px;}
-    button.primary { background:#6d28d9; color:#fff; }
-    button.secondary { background:#eee; color:#333; }
-    .status { margin:10px 0; font-size:14px; color:#555; }
-    .error { color:red; margin:10px 0; }
-    video { width:100%; border-radius:8px; margin-top:10px; display:none; }
-    .actions { margin-top:8px; }
-  </style>
+  <meta charset="UTF-8">
+  <title>TokTokDL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <main class="wrap">
-    <h2>TokTokDL — TikTok Downloader</h2>
-    <input id="urlInput" placeholder="Tempel link TikTok di sini...">
-    <div>
-      <button id="goBtn" class="primary">Cari</button>
-      <button id="clearBtn" class="secondary">Hapus</button>
-    </div>
-    <div class="status" id="status"></div>
-    <div class="error" id="error"></div>
+  <h1>TokTokDL</h1>
+  <p>Download video TikTok publik tanpa watermark.</p>
 
-    <video id="preview" controls></video>
+  <input id="urlInput" placeholder="Tempel link TikTok di sini">
+  <button id="goBtn">Download</button>
 
-    <div class="actions">
-      <a id="dlBtn" target="_blank"><button class="primary">Download</button></a>
-      <button id="copyBtn" class="secondary">Copy URL</button>
-      <button id="openBtn" class="secondary">Open in new tab</button>
-    </div>
-  </main>
+  <a id="dlBtn" style="display:none;">Download Video</a>
 
-<script>
-const endpoints = [
-  (url)=>`https://api.tikwm.com/?url=${encodeURIComponent(url)}`,
-  (url)=>`https://ttsave.app/api/fetch?url=${encodeURIComponent(url)}`
-];
-
-const urlInput = document.getElementById('urlInput');
-const goBtn = document.getElementById('goBtn');
-const clearBtn = document.getElementById('clearBtn');
-const statusEl = document.getElementById('status');
-const errorEl = document.getElementById('error');
-const preview = document.getElementById('preview');
-const dlBtn = document.getElementById('dlBtn');
-const copyBtn = document.getElementById('copyBtn');
-const openBtn = document.getElementById('openBtn');
-
-function showError(msg){ errorEl.textContent=msg; }
-function clearError(){ errorEl.textContent=''; }
-
-function isTikTok(url){ return /tiktok\.com|vt\.tiktok\.com/.test(url); }
-
-async function fetchJson(url){
-  const res = await fetch(url);
-  if(!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
-
-async function findVideo(url){
-  clearError();
-  statusEl.textContent="Mencari video...";
-  preview.style.display='none';
-
-  for(let ep of endpoints){
-    try{
-      const data = await fetchJson(ep(url));
-      let videoUrl = data.nowm || data.video?.play_addr || data.data?.url;
-      if(!videoUrl && data.raw){
-        const m = data.raw.match(/https?:\/\/[^'"\s>]+\.mp4/i);
-        if(m) videoUrl = m[0];
-      }
-      if(videoUrl){
-        return videoUrl;
-      }
-    }catch(e){
-      console.warn(e);
-    }
-  }
-  throw new Error("Gagal menemukan video. Coba lagi nanti.");
-}
-
-goBtn.addEventListener('click', async ()=>{
-  const url = urlInput.value.trim();
-  if(!url){ showError("Masukkan URL TikTok"); return; }
-  if(!isTikTok(url)){ showError("Link tampaknya bukan TikTok"); return; }
-  try{
-    const videoUrl = await findVideo(url);
-    statusEl.textContent="Video ditemukan!";
-    preview.src = videoUrl;
-    preview.style.display='block';
-    dlBtn.href = videoUrl;
-    copyBtn.onclick = ()=>navigator.clipboard.writeText(videoUrl).then(()=>alert('URL disalin!'));
-    openBtn.onclick = ()=>window.open(videoUrl,'_blank');
-  }catch(e){
-    showError(e.message);
-    statusEl.textContent='';
-  }
-});
-
-clearBtn.addEventListener('click', ()=>{
-  urlInput.value='';
-  preview.style.display='none';
-  statusEl.textContent='';
-  clearError();
-});
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
