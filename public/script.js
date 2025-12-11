@@ -54,6 +54,7 @@ form.addEventListener("submit", async (e) => {
     document.getElementById("tiktok-author").textContent = data.author;
 
     resultEl.style.display = "block";
+    resultEl.classList.add("show"); // supaya fade-in muncul
     statusEl.textContent = isMobile()
       ? "Tap tombol Download Video di bawah untuk menyimpan."
       : "Selesai!";
