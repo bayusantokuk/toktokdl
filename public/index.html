@@ -1,28 +1,33 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<title>TokTokDL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TokTokDL — TikTok Downloader</title>
 <style>
-body{font-family:sans-serif;background:#f7f8fb;color:#333;padding:20px;}
-input,button{padding:10px;margin:5px;}
-#result{margin-top:20px;display:none;}
-#thumb{width:200px;height:150px;background:#eee;margin-bottom:10px;}
+  body{font-family:sans-serif;padding:40px;background:#f7f8fb;color:#333;}
+  .wrap{max-width:600px;margin:0 auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+  input{width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
+  button{padding:10px 20px;border:none;border-radius:8px;background:#6d28d9;color:#fff;cursor:pointer;}
+  #result{margin-top:20px;display:none;}
+  #thumb{width:100%;border-radius:8px;}
+  .error{color:#ef4444;}
 </style>
 </head>
 <body>
-<h1>TokTokDL — TikTok Downloader</h1>
-<input id="urlInput" placeholder="Tempel link TikTok">
-<button id="goBtn">Download</button>
-<div id="status"></div>
-<div id="error" style="color:red;display:none;"></div>
+<div class="wrap">
+  <h1>TokTokDL</h1>
+  <input id="urlInput" placeholder="Tempel link TikTok disini">
+  <button id="goBtn">Download</button>
+  <div id="status"></div>
+  <div id="error" class="error"></div>
 
-<div id="result">
-  <div id="thumb"></div>
-  <h3 id="title"></h3>
-  <p id="author"></p>
-  <a id="dlBtn" href="#" download="tiktok.mp4">Download Video</a>
+  <div id="result">
+    <img id="thumb" src="" alt="Thumbnail">
+    <h3 id="title"></h3>
+    <p id="author"></p>
+    <a id="dlBtn" href="#" download>Download Video</a>
+  </div>
 </div>
 
 <script>
@@ -38,7 +43,7 @@ const errorEl = document.getElementById('error');
 
 goBtn.addEventListener('click', async () => {
   const url = urlInput.value.trim();
-  errorEl.style.display = 'none';
+  errorEl.textContent = '';
   statusEl.textContent = 'Mencari video...';
 
   try {
@@ -48,15 +53,16 @@ goBtn.addEventListener('click', async () => {
     if (!res.ok) throw new Error(data.error || 'Gagal fetch');
 
     dlBtn.href = data.videoUrl;
+    dlBtn.setAttribute('download', 'tiktok.mp4');
+    thumbEl.src = data.thumb;
     titleEl.textContent = data.title;
     authorEl.textContent = data.author;
-    thumbEl.style.backgroundImage = `url('${data.thumb}')`;
     resultEl.style.display = 'block';
     statusEl.textContent = 'Selesai! Klik Download.';
   } catch (e) {
-    errorEl.style.display = 'block';
     errorEl.textContent = e.message;
     statusEl.textContent = '';
+    resultEl.style.display = 'none';
   }
 });
 </script>
